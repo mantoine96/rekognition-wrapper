@@ -19,7 +19,7 @@ def get_args():
     parser.add_argument('-i',  '--image')
     parser.add_argument('-p', '--profile_name', default='rekognition')
     parser.add_argument('-c', '--collection-id')
-    parser.add_argument('--face-id')
+    parser.add_argument('--face-ids')
     parser.add_argument('action', metavar='ACTION', type=str,
                         help='which action to execute')
     # parser.add
