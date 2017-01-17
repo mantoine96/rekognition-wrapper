@@ -19,6 +19,6 @@ def delete_collection(args, client):
     return response
 
 
-def list_collections(client):
+def list_collections(args, client):
     response = client.list_collections()
     return response

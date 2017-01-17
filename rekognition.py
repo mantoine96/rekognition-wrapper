@@ -25,13 +25,33 @@ def get_args():
     # parser.add
     return parser.parse_args()
 
-dict available_actions = {
 
-        }
+def execute_actions(args, client):
+    if not args.action:
+        raise Exception("No action defined")
+    else:
+        actions = {
+                "detect-labels": labels.detect_labels,
+                "detect-faces": faces.detect_faces,
+                "compare-faces": faces.compare_faces,
+                "index-faces": faces.index_faces,
+                "search-faces": faces.search_faces,
+                "search-faces-by-image": faces.search_faces_by_image,
+                "delete-faces": faces.delete_faces,
+                "list-faces": faces.list_faces,
+                "create-collection": collections.create_collection,
+                "delete-collection": collections.delete_collection,
+                "list-collections": collections.list_collections
+                }
+        if args.action not in actions:
+            raise Exception("No such action")
+        else:
+            return (actions.get(args.action)(args, client))
+
 
 if __name__ == '__main__':
     args = get_args()
     client = get_client(args)
-    print(args.action)
-    print(faces.compare_faces(args, client))
+    if args.action:
+        print(execute_actions(args, client))
     print("help")
